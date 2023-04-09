@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const API_ENDPOINT = "https://backend-zk8d.api.codehooks.io/dev/users"
@@ -25,10 +26,11 @@ async function deleteTodo(id, refresh) {
 const ToDoItem = ({task}) => {
 
     const router = useRouter();
-
+    const id_param = "/todo?id=".concat(task._id)
     return(<>
     <input type="checkbox" onChange={() => completeTodo(task._id, task.complete, router.refresh)} checked={task.complete}/>
-    <span style={{padding:15}}>{task.body}, {task.complete.toString()}</span>
+    <span style={{padding:10}}>{task.body}, {task.complete.toString()}</span>
+    <Link href={id_param} style={{padding: 5}}>View Task</Link>
     <button onClick={() => deleteTodo(task._id, router.refresh)}>Delete</button>
     </>)
 }

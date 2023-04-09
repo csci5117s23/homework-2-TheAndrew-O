@@ -1,7 +1,11 @@
-import Image from 'next/image'
+
 import { Inter } from 'next/font/google'
 import { useEffect, useState } from 'react'
 import ToDoList from './toDoList'
+import { useSession, signOut, signIn } from 'next-auth/react'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,11 +13,9 @@ export default function Home() {
 
   const API_ENDPOINT = "https://backend-zk8d.api.codehooks.io/dev/users"
   const API_KEY = "6ac3cba4-a25e-4341-91cc-0f809af8bc44"
-  let POST_ID = "6431f256c54416abf97bc26f"
-
-  const [posts, setPosts] = useState(null)
+  const {data: session, status} = useSession()
   const [loading, setLoading] = useState(true)
-  const [todos, setTodos] = useState([])
+  const router = useRouter()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,32 +25,25 @@ export default function Home() {
       })
       const data = await response.json()
       // update state -- configured earlier.
-      setPosts(data);
       setLoading(false);
     }
     fetchData();
   }, [])
 
- 
-
-  let result = API_ENDPOINT.concat("/",POST_ID)
-
-  const deleteData = async () => {
-    const response = await fetch(result, {
-      'method':'DELETE',
-      'headers': {'x-apikey': API_KEY}
-    })
-    const data = await response.json()
-  }
-
-
-
   if(loading){
-    return(<span>hello...</span>)
+    return(<span>Loading...</span>)
   }
   else {
-    return (<>
-    <ToDoList/>
-    </>)
+    if (session) {
+      router.push('/todos')
+    }
+    else {
+      return(<>
+      <div>
+        <p>Andrew's to-do app</p>
+        <button onClick={() => signIn()}>Sign In</button>
+      </div>
+      </>)
+    }
   }
 }

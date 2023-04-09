@@ -1,26 +1,17 @@
 import React, { useState, useEffect } from "react";
-import ToDoItem from "./toDoItem";
-import AddNewTodo from "./addItem";
+import ToDoItem from "@/pages/toDoItem";
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from "next/router";
 
 const API_ENDPOINT = "https://backend-zk8d.api.codehooks.io/dev/users"
 const API_KEY = "6ac3cba4-a25e-4341-91cc-0f809af8bc44"
 
-const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
+const DoneItems = () => {
 
   const [todos, setTodos] = useState([]);
-  const [inputText, setInputText] = useState("");
   const {data: session, status} = useSession()
   const router = useRouter()
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputText.trim()) {
-      addTodo(inputText.trim());
-      setInputText("");
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,10 +38,9 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
         <button onClick={() => signOut()}>Sign Out</button>
       </div>
       <div>
-          <AddNewTodo />
         <ul>
           {todos.map((todo, index) => {
-            if (todo.email === session.user.email && todo.complete !== true) {
+            if (todo.email === session.user.email && todo.complete === true) {
               return(
                 <li key={todo._id} style={{paddingLeft:15}}>
                     <ToDoItem task={todo}/>
@@ -69,4 +59,4 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
   }
 };
 
-export default ToDoList;
+export default DoneItems;
