@@ -30,7 +30,7 @@ const ToDoItem = ({task}) => {
     return(<>
     <input type="checkbox" onChange={() => completeTodo(task._id, task.complete, router.refresh)} checked={task.complete}/>
     <span style={{padding:10}}>{task.body}, {task.complete.toString()}</span>
-    <Link href={id_param} style={{padding: 5}}>View Task</Link>
+    {task.complete ? null : <Link href={id_param} style={{padding: 5}}>View Task</Link>}
     <button onClick={() => deleteTodo(task._id, router.refresh)}>Delete</button>
     </>)
 }

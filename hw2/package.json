@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tiptap/pm": "^2.0.2",
+    "@tiptap/react": "^2.0.2",
+    "@tiptap/starter-kit": "^2.0.2",
     "autoprefixer": "10.4.14",
     "codehooks-crudlify": "^1.0.8",
     "codehooks-js": "^1.0.10",
@@ -20,6 +23,9 @@
     "query-to-mongo": "^0.10.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "slate": "^0.93.0",
+    "slate-history": "^0.93.0",
+    "slate-react": "^0.93.0",
     "tailwindcss": "3.3.1",
     "yup": "^1.0.2"
   }

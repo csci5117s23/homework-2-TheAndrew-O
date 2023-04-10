@@ -42,7 +42,7 @@ const DoneItems = () => {
           {todos.map((todo, index) => {
             if (todo.email === session.user.email && todo.complete === true) {
               return(
-                <li key={todo._id} style={{paddingLeft:15}}>
+                <li key={todo._id} style={{ textDecoration: todo.complete ? "line-through" : "none", paddingLeft: 15}}>
                     <ToDoItem task={todo}/>
                 </li>
               );
