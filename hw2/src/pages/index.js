@@ -40,7 +40,7 @@ export default function Home() {
     else {
       return(<>
       <div>
-        <p>Andrew's to-do app</p>
+        <p>Andrew&apos;s to-do app</p>
         <button onClick={() => signIn()}>Sign In</button>
       </div>
       </>)

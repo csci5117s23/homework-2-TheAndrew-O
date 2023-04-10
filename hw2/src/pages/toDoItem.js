@@ -24,8 +24,10 @@ async function deleteTodo(id, refresh) {
 }
 
 const ToDoItem = ({task}) => {
-
     const router = useRouter();
+    if(!task){
+        return null
+    }
     const id_param = "/todo?id=".concat(task._id)
     return(<>
     <input type="checkbox" onChange={() => completeTodo(task._id, task.complete, router.refresh)} checked={task.complete}/>

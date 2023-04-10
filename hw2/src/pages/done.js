@@ -4,7 +4,8 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { useSession } from "next-auth/react"
-const done = () => {
+
+const Done = () => {
     const router = useRouter()
     const {data: session, status} = useSession()
 
@@ -25,4 +26,4 @@ const done = () => {
     }
 }
 
-export default done
+export default Done

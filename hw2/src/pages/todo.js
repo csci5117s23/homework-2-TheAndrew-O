@@ -76,7 +76,7 @@ const ToDo = () => {
                 <h1>Details</h1>
                 {todos.map((todo, index) => {
                       return(
-                        <div>
+                        <div key={todo._id}>
                             { editing ? (
                                 <input
                                 type="text"
