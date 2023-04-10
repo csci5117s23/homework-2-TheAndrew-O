@@ -48,7 +48,7 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
       </div>
       <div>
           <AddNewTodo />
-        <ul>
+        <ul className="list-disc">
           {todos.map((todo, index) => {
             if (todo.email === session.user.email && todo.complete !== true) {
               return(
