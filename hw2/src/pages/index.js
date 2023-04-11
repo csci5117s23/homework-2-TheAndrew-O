@@ -6,6 +6,8 @@ import { useSession, signOut, signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { useRouter } from 'next/router'
+import Navbar from '@/components/Navbar'
+import ParticleBackground from '@/components/ParticleBackground'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,7 +33,12 @@ export default function Home() {
   }, [])
 
   if(loading){
-    return(<span>Loading...</span>)
+    return(<>
+    <div className='justify-center text-center items-center'>
+      Loading...
+    </div>
+    <ParticleBackground />
+    </>)
   }
   else {
     if (session) {
@@ -39,10 +46,14 @@ export default function Home() {
     }
     else {
       return(<>
-      <div>
-        <p>Andrew&apos;s to-do app</p>
-        <button onClick={() => signIn()}>Sign In</button>
+      <div className="backdrop">
+        <Navbar />
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 pt-60">
+          <div className="group relative items-center justify-center overflow-hidden text-center">Hello</div>
+          <div className="group relative items-center justify-center overflow-hidden text-center my-auto mx-auto"><img src='astro.svg' width={'300'} height={'300'}></img></div>
+        </div>
       </div>
+      <ParticleBackground />
       </>)
     }
   }

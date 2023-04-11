@@ -44,9 +44,6 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
   if(session){
     return (<>
       <div>
-        <button onClick={() => signOut()}>Sign Out</button>
-      </div>
-      <div>
           <AddNewTodo />
         <ul>
           {todos.map((todo, index) => {
