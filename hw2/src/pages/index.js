@@ -13,12 +13,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const API_ENDPOINT = "https://backend-zk8d.api.codehooks.io/dev/users"
-  const API_KEY = "6ac3cba4-a25e-4341-91cc-0f809af8bc44"
   const {data: session, status} = useSession()
   const [loading, setLoading] = useState(true)
   const router = useRouter()
-
+  const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT
+  const API_KEY = process.env.NEXT_PUBLIC_API_KEY
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(API_ENDPOINT, {
@@ -33,6 +32,8 @@ export default function Home() {
   }, [])
 
   if(loading){
+    console.log(API_ENDPOINT)
+    console.log(API_KEY)
     return(<>
     <div className='justify-center text-center items-center align-middle'>
       Loading...

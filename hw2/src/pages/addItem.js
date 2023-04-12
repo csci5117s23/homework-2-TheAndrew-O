@@ -4,8 +4,8 @@ import { date } from "yup";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
-const API_ENDPOINT = "https://backend-zk8d.api.codehooks.io/dev/users"
-const API_KEY = "6ac3cba4-a25e-4341-91cc-0f809af8bc44"
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 
 async function addTodo(inputText, refresh, session){
     const today = new Date();

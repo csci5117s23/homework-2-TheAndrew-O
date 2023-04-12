@@ -6,8 +6,8 @@ import { useRouter as useroute } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import ParticleBackground from "@/components/ParticleBackground";
 
-const API_ENDPOINT = "https://backend-zk8d.api.codehooks.io/dev/users"
-const API_KEY = "6ac3cba4-a25e-4341-91cc-0f809af8bc44"
+const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 
 
 async function editTodo(id, textInput, refresh){
