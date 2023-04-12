@@ -56,8 +56,8 @@ const ToDoItem = ({task}) => {
         </label>
         </div>
         <span className="px-3">Mark as Completed</span>
-        <div className="truncate">
-            <span className="text-white p-2">{task.body}, {task.complete.toString()}</span>
+        <div className="truncate mb-2">
+            <span className="text-white">{task.created.substring(0,10)} - {task.body}</span>
         </div>
         {task.complete ? null : <Link href={id_param} className="px-10 hover:text-neutral-800">View Task</Link>}
         <button onClick={() => deleteTodo(task._id, router.refresh)} className="px-10 hover:text-red-600">Delete</button>

@@ -1,27 +1,17 @@
 import React, { useState, useEffect } from "react";
-import ToDoItem from "./toDoItem";
-import AddNewTodo from "./addItem";
+import ToDoItem from "@/pages/toDoItem";
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from "next/router";
-import SearchItems from "@/components/searchItems";
 
 const API_ENDPOINT = "https://backend-zk8d.api.codehooks.io/dev/users"
 const API_KEY = "6ac3cba4-a25e-4341-91cc-0f809af8bc44"
 
-const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
+const SearchItems = () => {
 
   const [todos, setTodos] = useState([]);
-  const [inputText, setInputText] = useState("");
   const {data: session, status} = useSession()
   const router = useRouter()
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputText.trim()) {
-      addTodo(inputText.trim());
-      setInputText("");
-    }
-  };
+  const [query, setQuery] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,17 +34,23 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
 
   if(session){
     return (<>
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 bg-transparent">
-      <div className="justify-center">
-        <AddNewTodo />
-        <SearchItems />
-      </div>
-      <div className="text-white overflow-hidden">
+      <div className="pt-20 justify-items-center">
+        <div className="flex justify-center text-center">
+            <input
+                type="text"
+                style={{color: "black"}}
+                value={query}
+                className="peer block min-h-[auto] w-3/5 rounded border-0 bg-white justify-center"
+                id="searchTask"
+                placeholder="Type to Search Something!"
+                onChange={(e) => setQuery(e.target.value)}
+            />
+        </div>
         <ul>
           {todos.map((todo, index) => {
-            if (todo.email === session.user.email && todo.complete !== true) {
+            if (todo.email === session.user.email && todo.complete === false && query !== "" && (todo.body.toLowerCase().includes(query.toLowerCase()) || todo.created.includes(query))) {
               return(
-                <li key={todo._id} style={{paddingLeft:15}} className="bg-slate-900 group relative transition-shadow hover:shadow-xl hover:bg-yellow-500 rounded mb-3 mx-10">
+                <li key={todo._id} style={{paddingLeft:15}} className="bg-slate-900 group relative transition-shadow hover:shadow-xl hover:bg-yellow-500 rounded mb-3 mx-10 mt-5">
                     <ToDoItem task={todo}/>
                 </li>
               );
@@ -63,8 +59,7 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
             }
           })}
         </ul>
-        </div>
-    </div>
+      </div>
       </>);
   }
   else{
@@ -72,4 +67,4 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
   }
 };
 
-export default ToDoList;
+export default SearchItems;
