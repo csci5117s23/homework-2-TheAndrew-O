@@ -55,7 +55,7 @@ export default function Home() {
               <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-yellow-500 relative inline-block">
                 <span class="relative text-white">perfect</span>
               </span>
-              &nbsp;tool for anyone who needs to keep track of their tasks. Its simple and easy-to-use interface gives you a visual representation of your to-do list, so you can focus on what's important.
+              &nbsp;tool for anyone who needs to keep track of their tasks. Its simple and easy-to-use interface gives you a visual representation of your to-do list, so you can focus on what&apos;s important.
             </blockquote>
           </div>
           <div className="group relative items-center justify-center overflow-hidden text-center my-auto mx-auto"><img src='astro.svg' width={'300'} height={'300'}></img></div>
