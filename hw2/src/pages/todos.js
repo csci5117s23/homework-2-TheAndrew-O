@@ -7,9 +7,8 @@ import ParticleBackground from '@/components/ParticleBackground'
 
 const todos = () => {
     return (<>
-    <Navbar />
+    <Navbar tab={1}/>
     <div className='items-center justify-center text-center pt-10'>
-        <Link href={"/done"} >Completed Tasks</Link>
         <ToDoList/>
     </div>
     <div className='backparticles'>

@@ -3,6 +3,8 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter as useroute } from "next/navigation";
+import Navbar from "@/components/Navbar";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const API_ENDPOINT = "https://backend-zk8d.api.codehooks.io/dev/users"
 const API_KEY = "6ac3cba4-a25e-4341-91cc-0f809af8bc44"
@@ -71,28 +73,39 @@ const ToDo = () => {
     
     if(session){
         return (<>
-        <div>
-            <span><Link href={"/todos"} >Return to ToDo List</Link></span>
-                <h1>Details</h1>
+        <Navbar tab={2}/>
+        <div className="justify-center text-center">
+            <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-yellow-500 relative inline-block m-8">
+                <span class="relative text-white">Task Description</span>
+            </span>
                 {todos.map((todo, index) => {
-                      return(
-                        <div key={todo._id}>
+                      return(<>
+                        <div key={todo._id} className="justify-center text-center">
                             { editing ? (
                                 <input
                                 type="text"
                                 style={{color: "black"}}
                                 value={text}
+                                className="min-h-[auto] h-auto w-3/5 rounded border-0 justify-center"
+                                placeholder={todo.body}
                                 onChange={handleTextChange}
                                 onBlur={() => editTodo(todo._id, text, r.refresh)}
                                 />
                             ) : (
-                                <p onClick={handleButtonClick}>{todo.body}</p>
+                                <p onClick={handleButtonClick}>{todo.body} - &nbsp;
+                                <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-pink-500 relative inline-block">
+                                    <span class="relative text-white">Created on: {todo.created.substring(0, 10)}</span>
+                                </span></p>
                             )}
-                            <button onClick={handleButtonClick}>{editing ? 'Save' : 'Edit'}</button>
                         </div>
-                      );
+                        <div className="space-x-4">
+                            <button className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300 mt-4" onClick={handleButtonClick}>{editing ? 'Save' : 'Edit'}</button>
+                            <Link className="py-2 px-3 bg-red-400 hover:bg-red-300 text-red-900 hover:text-red-800 rounded transition duration-300" href={"/todos"}>Cancel</Link>
+                        </div>
+                      </>);
                   })}
             </div>
+            <div className="backparticles"><ParticleBackground/></div>
         </>);
     }
     else {

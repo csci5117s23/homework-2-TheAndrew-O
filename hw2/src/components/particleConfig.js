@@ -67,7 +67,7 @@ const particlesConfig = {
       detect_on: "canvas",
       events: {
         onhover: {
-          enable: true,
+          enable: false,
           mode: "grab",
           parallax: {
             enable: true,

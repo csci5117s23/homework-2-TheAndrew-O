@@ -20,7 +20,7 @@ const DoneItems = () => {
         'headers': {'x-apikey': API_KEY}
       });
       const data = await response.json();
-      setTodos(data);
+      setTodos(data.reverse());
     };
 
     fetchData();
@@ -34,15 +34,12 @@ const DoneItems = () => {
 
   if(session){
     return (<>
-      <div>
-        <button onClick={() => signOut()}>Sign Out</button>
-      </div>
-      <div>
+      <div className="pt-10">
         <ul>
           {todos.map((todo, index) => {
             if (todo.email === session.user.email && todo.complete === true) {
               return(
-                <li key={todo._id} style={{ textDecoration: todo.complete ? "line-through" : "none", paddingLeft: 15}}>
+                <li key={todo._id} style={{ textDecoration: todo.complete ? "line-through" : "none", paddingLeft: 15}} className=" bg-yellow-600 group relative transition-shadow hover:shadow-xl hover:bg-slate-900 rounded mb-3 mx-10">
                     <ToDoItem task={todo}/>
                 </li>
               );

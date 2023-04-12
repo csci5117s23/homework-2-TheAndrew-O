@@ -29,7 +29,7 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
         'headers': {'x-apikey': API_KEY}
       });
       const data = await response.json();
-      setTodos(data);
+      setTodos(data.reverse());
     };
 
     fetchData();
@@ -43,13 +43,14 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
 
   if(session){
     return (<>
-      <div>
-          <AddNewTodo />
+    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2 bg-transparent">
+      <div><AddNewTodo /></div>
+      <div className="text-white overflow-hidden">
         <ul>
           {todos.map((todo, index) => {
             if (todo.email === session.user.email && todo.complete !== true) {
               return(
-                <li key={todo._id} style={{paddingLeft:15}}>
+                <li key={todo._id} style={{paddingLeft:15}} className="bg-slate-900 group relative transition-shadow hover:shadow-xl hover:bg-yellow-500 rounded mb-3 mx-10">
                     <ToDoItem task={todo}/>
                 </li>
               );
@@ -58,7 +59,8 @@ const ToDoList = ({ addTodo, toggleTodo, deleteTodo }) => {
             }
           })}
         </ul>
-      </div>
+        </div>
+    </div>
       </>);
   }
   else{

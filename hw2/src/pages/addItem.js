@@ -28,14 +28,19 @@ const AddNewTodo = () =>{
     const {data: session, status} = useSession()
     const router = useRouter()
     return(<>
-    <div>
+    <div className="flex justify-center">
         <input
         type="text"
         style={{color: "black"}}
         value={inputText}
+        className="peer block min-h-[auto] w-3/5 rounded border-0 bg-white"
+        id="addTask"
+        placeholder="Add Something!"
         onChange={(e) => setInputText(e.target.value)}
         />
-        <button type="submit" onClick={() => addTodo(inputText ,router.refresh, session)}>Add ToDo</button>
+    </div>
+    <div className="flex justify-center pt-2">
+        <button className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300" type="submit" onClick={() => addTodo(inputText ,router.refresh, session)}>Add ToDo</button>
     </div>
     </>)
 }
